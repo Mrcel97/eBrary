@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="m-3 text-center">
+    <form class="form-inline">
+      <div class="form-group">
+        <input type="search"
+               class="form-control"
+               placeholder="Enter search string"
+               name="search"
+               required>
+      </div>
+      <button type="submit"
+              class="btn btn-primary">
+        Search
+      </button>
+    </form>
+    <hr />
+
+    <div class="text-center">
+      <!-- TODO: Show when we are calling the API -->
+      <p class="lead">Loading...</p>
+
+      <!-- TODO: Show when no results are returned from the API -->
+      <p class="lead">No results returned</p>
+
+      <!-- TODO: Show when the user hasn't performed a search yet -->
+      <p class="lead">Enter a search string above and press search</p>
+    </div>
+  </div>
+
+  <!-- TODO: Show the results of the search -->
+  <app-book-list></app-book-list>
+
+  <div class="d-flex justify-content-center">
+    <!-- TODO: Show pagnation -->
+    <app-pager>
+    </app-pager>
+  </div>
+</div>

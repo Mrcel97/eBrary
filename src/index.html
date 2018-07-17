@@ -1,14 +1,23 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>BookSearch</title>
-  <base href="/">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
+<header>
+  <nav class="navbar">
+    <ul>
+      <li class="nav-section"><a routerLink="">Home</a></li>
+      <li class="nav-section"><a routerLink="search">Search</a></li>
+    </ul>  
+  </nav>
+</header>
 <body>
-  <app-root></app-root>
+  <div class="container-nav color-dark">
+    <div>
+      <p>ELibrary Online</p>
+    </div>
+  </div>
+  <div class="container color-light">
+    <div>
+      <p>Here you can see daily recommended books:</p>
+    </div>
+  </div>
 </body>
 </html>
