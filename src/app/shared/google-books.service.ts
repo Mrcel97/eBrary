@@ -69,7 +69,20 @@ export class GoogleBooksService {
     //TODO
   }
 
-  private bookFactory(item: any)/*: Book*/ {
-    //TODO
+  /** Version 2.0:
+   * Add: country + pdfAviavility + viewable[OPTN] + saleability[OPTN] +
+   */
+  private bookFactory(item: any): Book {
+    alert(item.volumeInfo.title);
+    return new Book(item.id,
+                    item.volumeInfo.title,
+                    item.volumeInfo.subTitle,
+                    item.volumeInfo.authors,
+                    item.volumeInfo.publisher,
+                    item.volumeInfo.publishDate,
+                    item.volumeInfo.description,
+                    item.volumeInfo.categories,
+                    item.volumeInfo.imageLinks.thumbnail,
+                    item.volumeInfo.imageLinks.smallThumbnail);
   }
 }
