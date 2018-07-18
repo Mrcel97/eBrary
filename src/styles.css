@@ -18,9 +18,10 @@ ul {
 ul li {
     display:inline;
     margin-right: 30px;
+    font-size: 1.5em;
 }
 ul li a {
-    font-size: 1.5em;
+    font-size: 0.7em;
 }
 a {
     color:#fff;
@@ -45,12 +46,10 @@ a {
 .container {
     display: grid;
     grid-template-columns: 50% auto;
-    min-width: 288px;
     border-radius: 0 0 5px 5px;
 }
 .container-nav {
     display: grid;
     grid-template-columns: 50% auto;
-    min-width: 288px;
     border-radius: 5px 5px 0 0;
 }

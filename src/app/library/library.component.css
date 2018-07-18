@@ -54,14 +54,10 @@ ul li a {
 .container {
     display: grid;
     grid-template-columns: auto;
-    min-width: 288px;
-    border-radius: 3px;
 }
 .container-nav {
     display: grid;
     grid-template-columns: auto;
-    min-width: 288px;
-    border-radius: 5px 5px 0 0;
 }
 .col {
     padding: .4em 1.3em;
