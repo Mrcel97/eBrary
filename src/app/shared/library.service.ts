@@ -6,14 +6,22 @@ import { Book } from './book';
 })
 export class LibraryService {
 
+  myBooks: Book[] = [];
+
   constructor() { }
 
   private save() {
-    //TODO
+    localStorage.setItem( 'myBooks', JSON.stringify(this.myBooks) );
   }
 
   private load() {
-    //TODO
+    var books = localStorage.getItem('myBooks');
+    /**
+     * 0 Books -> return;
+     * 
+     * X Books -> 
+     *            return localStorage.getItem('myBooks') [  ]
+     */
   }
 
   addBook(book: Book) {
