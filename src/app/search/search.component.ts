@@ -22,7 +22,10 @@ export class SearchComponent implements OnInit {
     private route: ActivatedRoute,
     private googleBooksService: GoogleBooksService){
       this.route.params.subscribe( param => { // Hear URL to detect changes.
-        console.log(param, "Constructor was called!");
+        console.log(param);
+        if (param['term']) {
+          this.onSearch(param['term']);
+        }
       } )
     }
 
@@ -31,7 +34,8 @@ export class SearchComponent implements OnInit {
   }
 
   onSearch(term: string) {
-    //TODO
+    var search = this.googleBooksService.searchBooks(term);
+    console.log(search);
   }
 
   ngOnInit() {

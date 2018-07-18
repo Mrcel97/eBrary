@@ -46,6 +46,11 @@ a {
     height: 35px;
     margin-bottom: 20px;
 }
+.nav-logo {
+    display: inline;
+    padding: 18px 20px 6.5px 20px;
+    margin: 0;
+}
 .nav-section {
     display: inline;
     padding: 18px 20px 6.5px 20px;
