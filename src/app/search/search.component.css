@@ -32,19 +32,10 @@ a {
     height: 35px;
     margin-bottom: 20px;
 }
-.nav-section {
-    display: inline;
-    padding: 17px 20px 8px 20px;
-    margin: 0;
-}
-.nav-section:hover {
-    transition: all .2s ease-in;
-    background-color: lightblue;
-}
 .container {
     display: grid;
     grid-template-columns: auto;
-    border-radius: 3px;
+    border-radius: 0;
 }
 .container-nav {
     display: grid;
@@ -64,7 +55,6 @@ input.txt {
     border: 0;
     padding: 1em;
     width: 80%;
-    margin-bottom: 2em;
     border-radius: 3px;
 }
 .btn {
@@ -73,6 +63,7 @@ input.txt {
     padding:1em 3em;
     background:#A5F883;
     color:#003A61;
+    margin-top: 2em;
     margin-bottom:1em;
     cursor:pointer;
     border-radius: 3px;
@@ -86,4 +77,8 @@ input.txt {
     padding:.5em;
     font-weight:bold;
     cursor:pointer;
+}
+.alert {
+    font-size: 12px;
+    margin-top: 10px;
 }

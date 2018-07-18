@@ -3,40 +3,40 @@
       <span class="subtitle">Search your eBook</span>
   </div>
   <div class="container-nav">
-    <form class="form-inline">
+    <form #f="ngForm" class="form-inline" (ngSubmit)="doSearch()">
       <p>Introduce a book to start your search!</p>
       <div class="form-group">
         <input type="search"
-               class="txt form-control"
-               placeholder="Search..."
-               name="search"
-               required>
+                class="form-control txt"
+                placeholder="Search..."
+                name="search"
+                [(ngModel)]="term"
+                required>
       </div>
       <button type="submit"
-              class="btn">
+              class="btn btn-primary"
+              [disabled]="!f.valid">
         Search
       </button>
     </form>
-    <hr />
-
+  </div>
+  <hr/>
+  <div class="container-nav">
     <div class="text-center">
       <!-- TODO: Show when we are calling the API -->
-      <p class="lead">Loading...</p>
+      <p class="lead" *ngIf="state==1">Loading...</p>
 
       <!-- TODO: Show when no results are returned from the API -->
-      <p class="lead">No results returned</p>
-
-      <!-- TODO: Show when the user hasn't performed a search yet -->
-      <p class="lead">Enter a search string above and press search</p>
+      <p class="lead" *ngIf="state==2">No results returned</p>
     </div>
-  </div>
+  
+    <!-- TODO: Show the results of the search -->
+    <app-book-list></app-book-list>
 
-  <!-- TODO: Show the results of the search -->
-  <app-book-list></app-book-list>
-
-  <div class="d-flex justify-content-center">
-    <!-- TODO: Show pagnation -->
-    <app-pager>
-    </app-pager>
+    <div class="d-flex justify-content-center">
+      <!-- TODO: Show pagnation -->
+      <app-pager>
+      </app-pager>
+    </div>
   </div>
 </div>

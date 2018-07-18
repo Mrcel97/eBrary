@@ -7,6 +7,14 @@ body {
     font-family: 'Raleway', 'Arial';
     color:#fff;
 }
+hr {
+    border: 0;
+    clear:both;
+    display:block;
+    width: 96%;               
+    background-color:#2E9CE6;
+    height: 3px;
+  }
 .container, .container-nav {
     margin: 0 5% 0 5%;
 }
@@ -14,6 +22,10 @@ ul {
     list-style-type:none;
     margin:0 0 2em 0;
     padding:0;
+}
+ul:first-child::first-letter {
+    color: rgb(43, 247, 43);
+    border: 1px gray;
 }
 ul li {
     display:inline;
@@ -36,7 +48,7 @@ a {
 }
 .nav-section {
     display: inline;
-    padding: 18px 20px 8.5px 20px;
+    padding: 18px 20px 6.5px 20px;
     margin: 0;
 }
 .nav-section:hover {
