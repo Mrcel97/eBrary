@@ -19,7 +19,6 @@ export class BookComponent implements OnInit {
               private route: ActivatedRoute,
               private libraryService: LibraryService) {
     this.route.params.subscribe(params => {
-      console.log(params);
       if (params['bookId']) {
         this.getBook(params['bookId']);
       }

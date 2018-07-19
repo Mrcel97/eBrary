@@ -4,7 +4,6 @@
     font-size: 12px;
     font-weight: 4px;
 }
-
 .book-card {
     display: inline-block;
     margin: 10px;
@@ -15,7 +14,6 @@
     transition: 0.3s;
     max-width: 250px;
 }
-
 .book-card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
@@ -48,4 +46,10 @@ a:hover + .book-info {
 }
 .my-animation {
     animation: MyAnimation 1s;
+}
+
+/* Bootstrap CSS */
+.modal-title{
+    margin-bottom: 0;
+    line-height: 1.5;
 }

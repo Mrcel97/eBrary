@@ -67,7 +67,6 @@ export class GoogleBooksService {
       .do(_ => this.loading = false)
       .do(_ => (this.enlapsedTime = ( Math.round( (window.performance.now() - t1 ))/1000 ) ) ) 
       .subscribe((books) => this.books = books)
-      console.log(this.enlapsedTime);
   }
 
   retrieveBook(bookId: string) {

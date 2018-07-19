@@ -25,7 +25,6 @@ export class SearchComponent implements OnInit {
     private route: ActivatedRoute,
     private googleBooksService: GoogleBooksService){
       this.route.params.subscribe( param => { // Hear URL to detect changes.
-        console.log("Started API serach of:", param);
         if (param['term']) {
           this.onSearch(param['term']);
         }
