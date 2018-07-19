@@ -52,6 +52,7 @@ a {
     background: #57B3F1;
 }
 input.txt {
+    background-color: whitesmoke;
     border: 0;
     padding: 1em;
     width: 80%;

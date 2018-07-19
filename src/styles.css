@@ -23,7 +23,7 @@ ul {
     margin:0 0 2em 0;
     padding:0;
 }
-ul:first-child::first-letter {
+.ul-nav:first-child::first-letter {
     color: rgb(43, 247, 43);
     border: 1px gray;
 }

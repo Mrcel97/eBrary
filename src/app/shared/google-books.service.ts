@@ -49,7 +49,7 @@ export class GoogleBooksService {
   public searchBooks(queryTitle: string) {
     this.query = queryTitle;
     this.loading = true;
-    this.enlapsedTime = new Date().getMilliseconds();
+    const t1 = window.performance.now();
     this.initialised = true;
     this.books = [];
     this.http.get(`${this.API_PATH}?q=${this.query}&maxResults=${this.pageSize}&startIndex=${this.startIndex}`)
@@ -65,8 +65,9 @@ export class GoogleBooksService {
         return items.map(item => this.bookFactory(item))
       })
       .do(_ => this.loading = false)
-      .do(_ => (this.enlapsedTime = (new Date().getMilliseconds() - this.enlapsedTime)/1000)) 
+      .do(_ => (this.enlapsedTime = ( Math.round( (window.performance.now() - t1 ))/1000 ) ) ) 
       .subscribe((books) => this.books = books)
+      console.log(this.enlapsedTime);
   }
 
   retrieveBook(bookId: string) {
