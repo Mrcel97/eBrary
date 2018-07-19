@@ -14,6 +14,7 @@ import { GoogleBooksService } from './shared/google-books.service';
 import { LibraryService } from './shared/library.service';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [GoogleBooksService, LibraryService],
   bootstrap: [AppComponent]
