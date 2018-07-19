@@ -24,10 +24,12 @@
   <div class="container-nav">
     <div class="text-center">
       <!-- TODO: Show when we are calling the API -->
-      <p class="lead" *ngIf="state==1">Loading...</p>
+      <p class="lead" *ngIf="googleBooksService.loading">Loading...</p>
+
+      <li *ngFor="let book of googleBooksService.books">{{ book.title }}</li>
 
       <!-- TODO: Show when no results are returned from the API -->
-      <p class="lead" *ngIf="state==2">No results returned</p>
+      <p class="lead" *ngIf="googleBooksService.books?.length == 0">Sorry, no results found... :(</p>
     </div>
   
     <!-- TODO: Show the results of the search -->

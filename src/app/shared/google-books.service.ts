@@ -17,6 +17,7 @@ export class GoogleBooksService {
   public pageSize: number = 10;
   public query: string = "";
   public books: Book[];
+  public totalResults: number;
 
 
   constructor(private http: Http) {
@@ -60,7 +61,6 @@ export class GoogleBooksService {
       .map(items => {
         return items.map(item => this.bookFactory(item))
       })
-      // .do(books => console.log(books))
       .do(_ => this.loading = false)
       .subscribe((books) => this.books = books)
   }
@@ -69,7 +69,24 @@ export class GoogleBooksService {
     //TODO
   }
 
+<<<<<<< Updated upstream
   private bookFactory(item: any)/*: Book*/ {
     //TODO
+=======
+  /** Version 2.0:
+   * Add: country + pdfAviavility + viewable[OPTN] + saleability[OPTN] +
+   */
+  private bookFactory(item: any): Book {
+    return new Book(item.id,
+                    item.volumeInfo.title,
+                    item.volumeInfo.subTitle,
+                    item.volumeInfo.authors,
+                    item.volumeInfo.publisher,
+                    item.volumeInfo.publishDate,
+                    item.volumeInfo.description,
+                    item.volumeInfo.categories,
+                    item.volumeInfo.imageLinks.thumbnail,
+                    item.volumeInfo.imageLinks.smallThumbnail);
+>>>>>>> Stashed changes
   }
 }

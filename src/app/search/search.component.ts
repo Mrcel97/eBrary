@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { GoogleBooksService } from "../shared/google-books.service";
+import { Book } from '../shared/book';
 
 @Component({
   selector: 'app-search',
@@ -11,6 +12,8 @@ import { GoogleBooksService } from "../shared/google-books.service";
 export class SearchComponent implements OnInit {
 
   private term: string = "";
+  private books: Book[];
+  private loading: boolean = false;
   /**0: Default state.
    * 1: API is searching.
    * 2: No results found.
@@ -22,7 +25,7 @@ export class SearchComponent implements OnInit {
     private route: ActivatedRoute,
     private googleBooksService: GoogleBooksService){
       this.route.params.subscribe( param => { // Hear URL to detect changes.
-        console.log(param);
+        console.log("Started API serach of:", param);
         if (param['term']) {
           this.onSearch(param['term']);
         }
@@ -35,7 +38,6 @@ export class SearchComponent implements OnInit {
 
   onSearch(term: string) {
     var search = this.googleBooksService.searchBooks(term);
-    console.log(search);
   }
 
   ngOnInit() {
