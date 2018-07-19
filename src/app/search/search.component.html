@@ -29,8 +29,6 @@
       <p class="lead" *ngIf="googleBooksService.books?.length != 0">
         Found {{ googleBooksService.totalResults }} results in {{ googleBooksService.enlapsedTime }} sec.
       </p>
-
-      <li *ngFor="let book of googleBooksService.books">{{ book.title }}</li>
     </div>
   
     <!-- TODO: Show the results of the search -->

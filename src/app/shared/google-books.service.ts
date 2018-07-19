@@ -65,7 +65,7 @@ export class GoogleBooksService {
         return items.map(item => this.bookFactory(item))
       })
       .do(_ => this.loading = false)
-      .do(_ => (this.enlapsedTime = (this.enlapsedTime - new Date().getMilliseconds())/1000)) 
+      .do(_ => (this.enlapsedTime = (new Date().getMilliseconds() - this.enlapsedTime)/1000)) 
       .subscribe((books) => this.books = books)
   }
 
