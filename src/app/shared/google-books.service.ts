@@ -69,10 +69,6 @@ export class GoogleBooksService {
     //TODO
   }
 
-<<<<<<< Updated upstream
-  private bookFactory(item: any)/*: Book*/ {
-    //TODO
-=======
   /** Version 2.0:
    * Add: country + pdfAviavility + viewable[OPTN] + saleability[OPTN] +
    */
@@ -87,6 +83,5 @@ export class GoogleBooksService {
                     item.volumeInfo.categories,
                     item.volumeInfo.imageLinks.thumbnail,
                     item.volumeInfo.imageLinks.smallThumbnail);
->>>>>>> Stashed changes
   }
 }
