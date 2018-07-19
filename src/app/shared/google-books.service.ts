@@ -18,6 +18,7 @@ export class GoogleBooksService {
   public query: string = "";
   public books: Book[];
   public totalResults: number;
+  public enlapsedTime: number;
 
 
   constructor(private http: Http) {
@@ -48,6 +49,7 @@ export class GoogleBooksService {
   public searchBooks(queryTitle: string) {
     this.query = queryTitle;
     this.loading = true;
+    this.enlapsedTime = new Date().getMilliseconds();
     this.initialised = true;
     this.books = [];
     this.http.get(`${this.API_PATH}?q=${this.query}&maxResults=${this.pageSize}&startIndex=${this.startIndex}`)
@@ -56,12 +58,14 @@ export class GoogleBooksService {
         this.totalItems = data.totalItems;
       })
       .map(data => {
-        return data.items ? data.items : [];
+        this.totalResults = data.totalItems ? data.totalItems : [] ; // GET totalResults
+        return data.items ? data.items : []; // GET 10 firsts books
       })
       .map(items => {
         return items.map(item => this.bookFactory(item))
       })
       .do(_ => this.loading = false)
+      .do(_ => (this.enlapsedTime = (this.enlapsedTime - new Date().getMilliseconds())/1000)) 
       .subscribe((books) => this.books = books)
   }
 

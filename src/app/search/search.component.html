@@ -23,13 +23,14 @@
   <hr/>
   <div class="container-nav">
     <div class="text-center">
-      <!-- TODO: Show when we are calling the API -->
       <p class="lead" *ngIf="googleBooksService.loading">Loading...</p>
 
-      <li *ngFor="let book of googleBooksService.books">{{ book.title }}</li>
-
-      <!-- TODO: Show when no results are returned from the API -->
       <p class="lead" *ngIf="googleBooksService.books?.length == 0">Sorry, no results found... :(</p>
+      <p class="lead" *ngIf="googleBooksService.books?.length != 0">
+        Found {{ googleBooksService.totalResults }} results in {{ googleBooksService.enlapsedTime }} sec.
+      </p>
+
+      <li *ngFor="let book of googleBooksService.books">{{ book.title }}</li>
     </div>
   
     <!-- TODO: Show the results of the search -->
