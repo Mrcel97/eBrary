@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 export class GoogleBooksService {
   private API_PATH: string = 'https://www.googleapis.com/books/v1/volumes';
   public loading: boolean = false;
+  public haveBooks: boolean = true;
   public initialised: boolean = false;
   public totalItems: number = 0;
   public _page: number = 1;
@@ -65,8 +66,21 @@ export class GoogleBooksService {
         return items.map(item => this.bookFactory(item))
       })
       .do(_ => this.loading = false)
-      .do(_ => (this.enlapsedTime = ( Math.round( (window.performance.now() - t1 ))/1000 ) ) ) 
-      .subscribe((books) => this.books = books)
+      .do(_ => (this.enlapsedTime = ( Math.round( (window.performance.now() - t1 ))/1000 ) ) )
+      .subscribe((books) => {
+        if (books.length != 0) {
+          this.books = books;
+        } else {
+          this.haveBooks = false;
+        }
+      })
+  }
+
+  updateBooksAmount(){
+    if (this.books.length == 0) {
+      this.haveBooks = false;
+      alert("Have No Books");
+    }
   }
 
   retrieveBook(bookId: string) {

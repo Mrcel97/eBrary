@@ -24,8 +24,7 @@
   <div class="container-nav">
     <div class="text-center">
       <p class="lead" *ngIf="googleBooksService.loading">Loading...</p>
-
-      <p class="lead" *ngIf="googleBooksService.books?.length == 0">Sorry, no results found... :(</p>
+      <p class="lead" *ngIf="!googleBooksService.haveBooks">Sorry, no results found... :(</p>
       <p class="lead" *ngIf="googleBooksService.books?.length > 0">
         Found {{ googleBooksService.totalResults }} results in {{ googleBooksService.enlapsedTime }} sec.
       </p>
