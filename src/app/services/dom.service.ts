@@ -3,8 +3,11 @@ import {
   Injector,
   ComponentFactoryResolver,
   EmbeddedViewRef,
-  ApplicationRef
+  ApplicationRef,
+  Component
 } from '@angular/core';
+import { BookInfoComponent } from '../book-info/book-info.component';
+import { ModalService } from './modal.service';
 
 @Injectable()
 export class DomService {
@@ -18,9 +21,7 @@ export class DomService {
 
   public appendComponentTo(parentId: string, child: any, childConfig?: childConfig) {
     // Create a component reference from the component 
-    const childComponentRef = this.componentFactoryResolver
-      .resolveComponentFactory(child)
-      .create(this.injector);
+    const childComponentRef = this.componentFactoryResolver.resolveComponentFactory(child).create(this.injector);
 
     // Attach the config to the child (inputs and outputs)
     this.attachConfig(childConfig, childComponentRef);

@@ -1,10 +1,16 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+
 <div class="sample-container">
   <div class="sample-text">
-    This is the sample modal
+    {{modalService.book.title}}
+    <hr/>
+    <img align="left" class="book-img" src="{{modalService.book.thumbnail}}" alt="{{modalService.book.title}} cover">
+    Book information
+    <ul>
+      <p class="sample-text-small">Subtitle: {{modalService.book.subTitle}}</p>
+    </ul>
   </div>
   <div class="sample-close">
-    <button (click)="close()">
-      Close Modal
-    </button>
+    <i class="far fa-times-circle close-icon" (click)="close()"></i>
   </div>
 </div>

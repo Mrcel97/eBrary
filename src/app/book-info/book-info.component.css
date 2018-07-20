@@ -1,17 +1,43 @@
 .sample-container{
     display:grid;
     grid-template-columns: 1fr;
-  }
-  .sample-text{
-    color: black;
-    font-size: 20px;
-    text-align:center;
-  }
-  .sample-close{
-    text-align:center;
-  }
-  .sample-close button{
-    width: 200px;
-    height: 200px;
-    color: tomato;
-  }
+    border-radius: 3px;
+}
+.sample-text{
+  color: black;
+  margin-top: 40px;
+  font-size: 20px;
+}
+.sample-text-small{
+  color: black;
+  font-size: 12px;
+}
+.sample-close{
+  text-align:center;
+}
+.sample-close button{
+  border-radius: 50%;
+  position: relative;
+  float: right;
+  top: -10px;
+  right: -10px;
+}
+.close-icon{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: black;
+  z-index: 15;
+  cursor: pointer;
+}
+.box-close:before {
+  content: "×";
+}
+.book-img {
+  padding: 10px;
+  max-width: 150px;
+  display:block;
+  margin: auto;
+  margin-left: 20px;
+  margin-top: 60px;
+}

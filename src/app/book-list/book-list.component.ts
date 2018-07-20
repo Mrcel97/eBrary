@@ -1,9 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { GoogleBooksService } from "../shared/google-books.service";
 import { Book } from '../shared/book';
+import { ModalService } from '../services/modal.service';
+import { BookInfoComponent } from '../book-info/book-info.component';
 
 @Component({
   selector: 'app-book-list',
@@ -17,23 +19,14 @@ export class BookListComponent {
     private router: Router,
     private route: ActivatedRoute,
     private googleBooksService: GoogleBooksService,
-    private modalService: NgbModal) {}
+    private modelService: NgbModal,
+    private modalService: ModalService ) {}
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
+  show(book: Book) {
+    let inputs = {
+      isMobile: false
     }
+    this.modalService.init(BookInfoComponent, inputs, {}, book);
   }
+
 }

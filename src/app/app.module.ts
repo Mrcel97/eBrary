@@ -20,8 +20,6 @@ import { LibraryService } from './shared/library.service';
 import { DomService } from './services/dom.service';
 import { ModalService } from './services/modal.service';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +40,7 @@ import { ModalService } from './services/modal.service';
     BrowserAnimationsModule,
     NgbModule.forRoot()
   ],
+  entryComponents: [BookInfoComponent, BookListComponent],
   providers: [GoogleBooksService, LibraryService, DomService, ModalService],
   bootstrap: [AppComponent]
 })
