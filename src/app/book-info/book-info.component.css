@@ -1,16 +1,27 @@
+h3, h5 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+h6:first-of-type {
+  margin: 40px auto auto auto;
+}
+h6 {
+  margin: auto auto auto auto;
+}
 .sample-container{
     display:grid;
     grid-template-columns: 1fr;
     border-radius: 3px;
+    overflow: auto;
 }
 .sample-text{
   color: black;
-  margin-top: 40px;
+  margin-top: 5px;
   font-size: 20px;
 }
 .sample-text-small{
-  text-align: left;
-  display: inline-block;
+  margin-left: 10px;
   color: black;
   font-size: 12px;
 }
@@ -36,12 +47,15 @@
   content: "×";
 }
 .book-img {
-  padding: 10px;
-  max-width: 150px;
   display:block;
+  padding: 10px;
+  min-width: 130px;
+  width: 5%;
+  max-width: 300px;
   margin: auto;
-  margin-left: 20px;
+  margin-left: 5%;
   margin-top: 60px;
+  margin-bottom: 20px;
 }
 @keyframes MyAnimation {
   0% {
@@ -53,4 +67,12 @@
 }
 .animated {
   animation: MyAnimation 1s;
+}
+.pop-thumb {
+  float: left
+}
+.right-text {
+  text-align: justify;
+  margin-left: 180px;
+  margin-right: 20px;
 }
