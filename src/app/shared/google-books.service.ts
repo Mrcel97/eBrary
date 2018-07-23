@@ -93,7 +93,7 @@ export class GoogleBooksService {
   private bookFactory(item: any): Book {
     return new Book(item.id,
                     item.volumeInfo.title,
-                    item.volumeInfo.subTitle,
+                    item.volumeInfo.subtitle,
                     item.volumeInfo.authors,
                     item.volumeInfo.publisher,
                     item.volumeInfo.publishDate,
