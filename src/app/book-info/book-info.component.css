@@ -21,9 +21,8 @@ h6 {
   font-size: 20px;
 }
 .sample-text-small{
-  margin-left: 10px;
   color: black;
-  font-size: 12px;
+  font-size: 14px;
 }
 .sample-close{
   text-align:center;
@@ -74,5 +73,5 @@ h6 {
 .right-text {
   text-align: justify;
   margin-left: 180px;
-  margin-right: 20px;
+  margin-right: 30px;
 }

@@ -18,7 +18,6 @@ export class ModalService {
       outputs:outputs
     }
     this.book = book;
-    console.log(this.book);
     this.domService.appendComponentTo(this.modalElementId, component, componentConfig);
     document.getElementById(this.modalElementId).className = 'show';
     document.getElementById(this.overlayElementId).className = 'show';
