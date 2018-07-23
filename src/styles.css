@@ -64,6 +64,7 @@ a {
     display: grid;
     grid-template-columns: 50% auto;
     border-radius: 0 0 5px 5px;
+    margin-bottom: 20px;
 }
 .container-nav {
     display: grid;

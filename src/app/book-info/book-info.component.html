@@ -18,7 +18,7 @@
           <h6>Published Date: </h6>
           <p class="sample-text-small">{{modalService.book.publishDate}}</p>
           <h6>Categories: </h6>
-          <p class="sample-text-small">{{modalService.book.categories}}</p>
+          <p class="sample-text-small category" *ngFor="let item of modalService.book.categories">{{item}}</p>
           <h6>Description: </h6>
           <p class="sample-text-small">{{modalService.book.description}}</p>
         </ul>

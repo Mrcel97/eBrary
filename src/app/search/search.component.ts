@@ -13,12 +13,6 @@ export class SearchComponent implements OnInit {
 
   private term: string = "";
   private books: Book[];
-  private loading: boolean = false;
-  /**0: Default state.
-   * 1: API is searching.
-   * 2: No results found.
-   */
-  private state: number = 0;
 
   constructor(
     private router: Router,
