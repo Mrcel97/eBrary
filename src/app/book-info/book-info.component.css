@@ -9,6 +9,8 @@
   font-size: 20px;
 }
 .sample-text-small{
+  text-align: left;
+  display: inline-block;
   color: black;
   font-size: 12px;
 }
@@ -40,4 +42,15 @@
   margin: auto;
   margin-left: 20px;
   margin-top: 60px;
+}
+@keyframes MyAnimation {
+  0% {
+      transform: scale(1.025);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+.animated {
+  animation: MyAnimation 1s;
 }
