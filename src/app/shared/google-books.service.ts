@@ -96,7 +96,7 @@ export class GoogleBooksService {
                     item.volumeInfo.subtitle,
                     item.volumeInfo.authors,
                     item.volumeInfo.publisher,
-                    item.volumeInfo.publishDate,
+                    item.volumeInfo.publishedDate,
                     item.volumeInfo.description,
                     item.volumeInfo.categories,
                     item.volumeInfo.imageLinks.thumbnail,
