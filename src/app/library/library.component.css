@@ -95,3 +95,6 @@ input.txt {
     font-weight:bold;
     cursor:pointer;
 }
+.text-center {
+    padding-bottom: 10px;
+}

@@ -16,6 +16,7 @@ export class GoogleBooksService {
   public haveBooks: boolean = true;
   public initialised: boolean = false;
   private ended: BehaviorSubject<boolean>;
+  public active: boolean = false;
   public totalItems: number = 0;
   public _page: number = 1;
   public pageSize: number = 10;
