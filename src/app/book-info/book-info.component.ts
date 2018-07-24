@@ -8,10 +8,15 @@ import { ModalService } from '../services/modal.service';
 })
 export class BookInfoComponent  {
  
+  private hovering: boolean = false;
+
   constructor(private modalService: ModalService) { }
 
   public close() {
     this.modalService.destroy();
   }
- 
+
+  addToLibrary() {
+    console.log('Library Service Called!')  }
+
 }
