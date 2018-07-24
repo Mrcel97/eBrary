@@ -34,5 +34,7 @@
     (mouseenter) = "hovering = true"
     (mouseleave) = "hovering = false"> <p class="small-txt" *ngIf="hovering">Add Book <i style="margin-left: 2px" class="fas fa-angle-right"></i></p> </a>
   </div>
-  <div class="added-message" *ngIf="contains(modalService.book)"><p class="small-txt">Successfully Added!</p></div>
+  <div class="added-message" *ngIf="contains(modalService.book)">
+    <p class="small-txt" (click)="removeFromLibrary(modalService.book)">Remove from Library</p>
+  </div>
 </div>

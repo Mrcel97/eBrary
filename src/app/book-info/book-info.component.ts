@@ -27,4 +27,8 @@ export class BookInfoComponent  {
     this.libraryService.addBook(book);
   }
 
+  removeFromLibrary(book: Book){
+    this.libraryService.removeBook(book);
+  }
+
 }

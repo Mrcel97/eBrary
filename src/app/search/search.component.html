@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+
 <div class="container color-light">
   <div class="subtitle-section color-dark">
       <span class="subtitle">Search your eBook</span>
@@ -23,7 +25,7 @@
   <hr/>
   <div class="container-nav">
     <div class="text-center">
-      <p class="lead" *ngIf="googleBooksService.loading">Loading...</p>
+      <p class="lead" *ngIf="googleBooksService.loading">Loading <i class="fa fa-spinner fa-spin fa-fw"></i></p>
       <p class="lead" *ngIf="!googleBooksService.haveBooks">Sorry, no results found... :(</p>
       <p class="lead" *ngIf="googleBooksService.books?.length > 0">
         Found {{ googleBooksService.totalResults }} results in {{ googleBooksService.enlapsedTime }} sec.
