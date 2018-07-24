@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {GoogleBooksService} from "../shared/google-books.service";
-import {Book} from "../shared/book";
-import {Router, ActivatedRoute} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from "@angular/router";
+import { FormsModule } from "@angular/forms";
+import { GoogleBooksService } from "../shared/google-books.service";
+import { Book } from '../shared/book';
 
 @Component({
   selector: 'app-search',
@@ -10,18 +11,29 @@ import {Router, ActivatedRoute} from "@angular/router";
 })
 export class SearchComponent implements OnInit {
 
-  constructor() {
-  }
+  private term: string = "";
+  private books: Book[];
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private googleBooksService: GoogleBooksService){
+      this.route.params.subscribe( param => { // Hear URL to detect changes.
+        if (param['term']) {
+          this.onSearch(param['term']);
+        }
+      } )
+    }
 
   doSearch() {
-    //TODO
+    this.router.navigate(['search', {term: this.term}]) // Change URL.
   }
 
   onSearch(term: string) {
-    //TODO
+    var search = this.googleBooksService.searchBooks(term);
   }
 
   ngOnInit() {
   }
-
+  
 }

@@ -1,0 +1,24 @@
+.pager-container {
+    text-align: center;
+}
+.pager-list {
+    display: inline-block;
+}
+li {
+    list-style-type: none;
+    display: inline-block;
+}
+.pager-item {
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.pager-item:hover {
+    cursor: pointer;
+}
+.selected-page {
+    color: rgb(43, 247, 43);
+    font-size: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+}

@@ -1,3 +1,9 @@
-<p>
-  pager works!
-</p>
+<div class="pager-container" *ngIf="searchFinish">
+    <ul class="pager-list" *ngFor="let page of googleBooksService.books | slice:0:10; let i=index">
+      <a class="pager-item" 
+         *ngIf="actualPage+i-1 != 0" 
+         (click)="getPage(actualPage+i-1)"
+         [ngClass]="{'selected-page': actualPage+i-1 == actualPage}">{{actualPage+i-1}}</a>
+    </ul>
+    <script>console.log(actualPage)</script>
+</div>

@@ -1,0 +1,88 @@
+h3, h5 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+h6:first-of-type {
+  margin: 40px auto auto auto;
+}
+h6 {
+  margin: auto auto auto auto;
+}
+.sample-container{
+    display:grid;
+    grid-template-columns: 1fr;
+    border-radius: 3px;
+    overflow: auto;
+}
+.sample-text{
+  color: black;
+  margin-top: 5px;
+  font-size: 20px;
+}
+.sample-text-small{
+  color: black;
+  font-size: 14px;
+}
+.sample-close{
+  text-align:center;
+}
+.sample-close button{
+  border-radius: 50%;
+  position: relative;
+  float: right;
+  top: -10px;
+  right: -10px;
+}
+.close-icon{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: black;
+  z-index: 15;
+  cursor: pointer;
+}
+.box-close:before {
+  content: "×";
+}
+.book-img {
+  display:block;
+  padding: 10px;
+  min-width: 130px;
+  width: 5%;
+  max-width: 300px;
+  margin: auto;
+  margin-left: 5%;
+  margin-top: 60px;
+  margin-bottom: 120px;
+}
+@keyframes MyAnimation {
+  0% {
+      transform: scale(1.025);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+.animated {
+  animation: MyAnimation 1s;
+}
+.pop-thumb {
+  float: left
+}
+.right-text {
+  text-align: justify;
+  margin-left: 180px;
+  margin-right: 30px;
+}
+.category {
+  padding: 4px;
+  display: inline-block;
+  color: white;
+  background-color: black;
+  border-radius: 15px;
+  margin-right: 5px;
+}
+.category:hover {
+  background-color: gray;
+}

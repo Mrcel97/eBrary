@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Book } from './book';
-import { Observable } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs/Rx';
 
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+declare var require: any
 
 @Injectable({
   providedIn: 'root'
@@ -13,19 +13,26 @@ import 'rxjs/add/operator/map';
 export class GoogleBooksService {
   private API_PATH: string = 'https://www.googleapis.com/books/v1/volumes';
   public loading: boolean = false;
+  public haveBooks: boolean = true;
   public initialised: boolean = false;
+  private ended: BehaviorSubject<boolean>;
+  public active: boolean = false;
   public totalItems: number = 0;
   public _page: number = 1;
   public pageSize: number = 10;
   public query: string = "";
   public books: Book[];
-
+  public totalResults: number;
+  public enlapsedTime: number;
+  private imageNotFound = require('../media/no-image.png');
+ 
 
   constructor(private http: Http) {
+    this.ended = new BehaviorSubject<boolean>(false);
   }
 
   get startIndex() {
-    return this.page * this.pageSize;
+    return (this._page - 1) * this.pageSize;
   }
 
   get totalPages() {
@@ -38,8 +45,14 @@ export class GoogleBooksService {
   }
 
   get page(): number {
-    //TODO
-    return 0;
+    return this._page;
+  }
+
+  changePage(num: number) {
+    if (num != this._page) {
+      this._page = num;
+      this.searchBooks(this.query);
+    }
   }
 
   set page(val: number) {
@@ -47,8 +60,10 @@ export class GoogleBooksService {
   }
 
   public searchBooks(queryTitle: string) {
+    this.ended.next(false);
     this.query = queryTitle;
     this.loading = true;
+    const initialTime = window.performance.now();
     this.initialised = true;
     this.books = [];
     this.http.get(`${this.API_PATH}?q=${this.query}&maxResults=${this.pageSize}&startIndex=${this.startIndex}`)
@@ -57,21 +72,66 @@ export class GoogleBooksService {
         this.totalItems = data.totalItems;
       })
       .map(data => {
-        return data.items ? data.items : [];
+        this.totalResults = data.totalItems ? data.totalItems : [] ; // GET totalResults
+        return data.items ? data.items : []; // GET 10 firsts books
       })
       .map(items => {
         return items.map(item => this.bookFactory(item))
       })
-      // .do(books => console.log(books))
       .do(_ => this.loading = false)
-      .subscribe((books) => this.books = books)
+      .do(_ => (this.enlapsedTime = ( Math.round( (window.performance.now() - initialTime ))/1000 ) ) )
+      .subscribe((books) => {
+        if (books.length != 0) {
+          this.books = books;
+          this.haveBooks = true;
+        } else {
+          this.haveBooks = false;
+        }
+        this.ended.next(true);
+      })
+  }
+
+  hasEnded(): Observable<boolean> {
+    return this.ended.asObservable();
+  }
+
+  updateBooksAmount(){
+    if (this.books.length == 0) {
+      this.haveBooks = false;
+      alert("Have No Books");
+    }
   }
 
   retrieveBook(bookId: string) {
     //TODO
   }
 
-  private bookFactory(item: any)/*: Book*/ {
-    //TODO
+  /** Version 2.0:
+   * Add: country + pdfAviavility + viewable[OPTN] + saleability[OPTN] +
+   */
+  private bookFactory(item: any): Book {
+    try {
+      return new Book(item.id,
+        item.volumeInfo.title,
+        item.volumeInfo.subtitle,
+        item.volumeInfo.authors,
+        item.volumeInfo.publisher,
+        item.volumeInfo.publishedDate,
+        item.volumeInfo.description,
+        item.volumeInfo.categories,
+        item.volumeInfo.imageLinks.thumbnail,
+        item.volumeInfo.imageLinks.smallThumbnail);
+    } catch (TypeError) {
+      return new Book(item.id,
+        item.volumeInfo.title,
+        item.volumeInfo.subtitle,
+        item.volumeInfo.authors,
+        item.volumeInfo.publisher,
+        item.volumeInfo.publishedDate,
+        item.volumeInfo.description,
+        item.volumeInfo.categories,
+        this.imageNotFound,
+        this.imageNotFound);
+    }
   }
 }
