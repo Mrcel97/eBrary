@@ -9,6 +9,7 @@ import { GoogleBooksService } from '../shared/google-books.service';
 export class PagerComponent implements OnInit {
   private totalPages: number;
   private actualPage: number = 1;
+  private searchFinish: boolean = false;
 
   constructor(
     private googleBooksService: GoogleBooksService,
@@ -17,7 +18,10 @@ export class PagerComponent implements OnInit {
   ngOnInit() {
     this.googleBooksService.hasEnded().subscribe(value => {
       if (value == true) {
+        this.searchFinish = true;
         this.initPager();
+      } else {
+        this.searchFinish = false;
       }
     });
   }

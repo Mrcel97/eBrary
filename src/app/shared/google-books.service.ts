@@ -59,6 +59,7 @@ export class GoogleBooksService {
   }
 
   public searchBooks(queryTitle: string) {
+    this.ended.next(false);
     this.query = queryTitle;
     this.loading = true;
     const initialTime = window.performance.now();
@@ -81,6 +82,7 @@ export class GoogleBooksService {
       .subscribe((books) => {
         if (books.length != 0) {
           this.books = books;
+          this.haveBooks = true;
         } else {
           this.haveBooks = false;
         }

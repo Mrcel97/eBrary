@@ -1,6 +1,7 @@
-<div class="pager-container" *ngIf="!googleBooksService.finished">
+<div class="pager-container" *ngIf="searchFinish">
     <ul class="pager-list" *ngFor="let page of googleBooksService.books | slice:0:10; let i=index">
       <a class="pager-item" (click)="getPage(actualPage+i)">{{actualPage+i}}</a>
     </ul>
+    <p class="pager-item" style="display: inline-block">...</p>
     <p class="pager-item" style="display: inline-block" (click)="getPage(totalPages)">{{totalPages}}</p>
 </div>
