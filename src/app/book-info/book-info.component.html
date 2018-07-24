@@ -27,4 +27,11 @@
   <div class="sample-close">
     <i class="far fa-times-circle close-icon" (click)="close()"></i>
   </div>
+  <div class="sample-add">
+    <a class="fa-lg add-icon" 
+    (click)="addToLibrary()"
+    [ngClass]="{'hovered-add-icon': hovering, 'fas fa-plus-circle': !hovering}"
+    (mouseenter) = "hovering = true"
+    (mouseleave) = "hovering = false"> <p class="small-txt" *ngIf="hovering">Add Book <i style="margin-left: 2px" class="fas fa-angle-right"></i></p> </a>
+  </div>
 </div>
