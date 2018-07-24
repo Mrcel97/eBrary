@@ -34,6 +34,16 @@ h6 {
   top: -10px;
   right: -10px;
 }
+.sample-add{
+  text-align:center;
+}
+.sample-add button{
+  border-radius: 50%;
+  position: relative;
+  float: right;
+  top: -10px;
+  right: -10px;
+}
 .close-icon{
   position: absolute;
   top: 5px;
@@ -41,6 +51,28 @@ h6 {
   color: black;
   z-index: 15;
   cursor: pointer;
+}
+.add-icon{
+  transition-timing-function: ease;
+  transition-duration: 0.35s;
+  position: absolute;
+  top: 140px;
+  left: 30px;
+  color: rgb(0, 200, 0);
+  border-radius: 50%;
+  background-color: green;
+  z-index: 15;
+  cursor: pointer;
+}
+.hovered-add-icon{
+  transition-timing-function: ease;
+  transition-duration: 0.35s;
+  width: 70px;
+  height: 16px;
+  left: 29px;
+  background-color: rgb(0, 200, 0);
+  border-radius: 2px;
+  border: solid 2px green;
 }
 .box-close:before {
   content: "×";
@@ -85,4 +117,11 @@ h6 {
 }
 .category:hover {
   background-color: gray;
+}
+.small-txt {
+  position: relative;
+  top: -10px;
+  font-size: 12px;
+  color: white;
+  font-weight: bold;
 }
