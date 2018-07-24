@@ -10,36 +10,45 @@ export class LibraryService {
 
   constructor() { }
 
-  private save() {
+  private save() { //Testing JSON not usable.
     localStorage.setItem( 'myBooks', JSON.stringify(this.myBooks) );
   }
 
-  private load() {
-    var books = localStorage.getItem('myBooks');
-    /**
-     * 0 Books -> return;
-     * 
-     * X Books -> 
-     *            return localStorage.getItem('myBooks') [  ]
-     */
+  private load() { //Testing JSON not usable.
+    var stored = JSON.parse(localStorage.getItem('myBooks'));
+    JSON.parse(localStorage.getItem('myBooks')).forEach(element => {
+      this.myBooks.push( new Book(element.id,
+                                  element.title,
+                                  element.subTitle,
+                                  element.authors,
+                                  element.publisher,
+                                  element.publishDate,
+                                  element.description,
+                                  element.categories,
+                                  element.thumbnail,
+                                  element.smallThumbnail) )
+    });
   }
 
   addBook(book: Book) {
-    //TODO
+    if ( book != undefined && !this.hasBook(book) ) {
+      this.myBooks.push(book);
+    }
   }
 
   removeBook(book: Book) {
-    //TODO
+    const index: number = this.indexOf(book);
+    if (index !== -1) {
+        this.myBooks.splice(index, 1);
+    } 
   }
 
   hasBook(book: Book): boolean {
-    //TODO
-    return true;
+    return this.myBooks.includes(book);
   }
 
   indexOf(book: Book): number {
-    //TODO
-    return 0;
+    return this.myBooks.indexOf(book);
   }
 
 }
