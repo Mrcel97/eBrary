@@ -37,6 +37,19 @@ h6 {
 .sample-add{
   text-align:center;
 }
+.added-message{
+  transition-timing-function: ease;
+  transition-duration: 0.35s;
+  position: absolute;
+  top: 100px;
+  left: 18px;
+  height: 16px;
+  padding: 4px;
+  color: green;
+  border-radius: 5px;
+  background-color: rgb(0, 200, 0);
+  z-index: 15;
+}
 .sample-add button{
   border-radius: 50%;
   position: relative;
@@ -67,8 +80,9 @@ h6 {
 .hovered-add-icon{
   transition-timing-function: ease;
   transition-duration: 0.35s;
+  top: 131px;
   width: 70px;
-  height: 16px;
+  height: 25px;
   left: 29px;
   background-color: rgb(0, 200, 0);
   border-radius: 2px;
@@ -120,7 +134,7 @@ h6 {
 }
 .small-txt {
   position: relative;
-  top: -10px;
+  top: -8px;
   font-size: 12px;
   color: white;
   font-weight: bold;

@@ -25,7 +25,9 @@ export class LibraryService {
   }
 
   addBook(book: Book) {
-    //TODO
+    if ( book != undefined && !this.myBooks.includes(book) ) {
+      this.myBooks.push(book);
+    }
   }
 
   removeBook(book: Book) {

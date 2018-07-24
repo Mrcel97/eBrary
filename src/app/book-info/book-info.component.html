@@ -29,9 +29,10 @@
   </div>
   <div class="sample-add">
     <a class="fa-lg add-icon" 
-    (click)="addToLibrary()"
+    (click)="addToLibrary(modalService.book)"
     [ngClass]="{'hovered-add-icon': hovering, 'fas fa-plus-circle': !hovering}"
     (mouseenter) = "hovering = true"
     (mouseleave) = "hovering = false"> <p class="small-txt" *ngIf="hovering">Add Book <i style="margin-left: 2px" class="fas fa-angle-right"></i></p> </a>
   </div>
+  <div class="added-message" *ngIf="contains(modalService.book)"><p class="small-txt">Successfully Added!</p></div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LibraryService } from '../shared/library.service';
 
 @Component({
   selector: 'app-library',
@@ -8,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class LibraryComponent implements OnInit {
   private searchFinish: boolean = false;
 
-  constructor() { }
+  constructor( private libraryService: LibraryService ) { }
 
   ngOnInit() {
   }
+
+  
 
 }

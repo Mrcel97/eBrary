@@ -19,15 +19,22 @@
       </form>
       <hr />
   
-      <div class="text-center">
+      <div class="text-center" *ngIf="libraryService.myBooks == empty">
         <!-- TODO: Show when library is empty -->
         <p class="suggestion">Your library is actually empty. Try </p>
         <a class="link" routerLink="/search/">Searching new eBooks!</a>
       </div>
+
+      <div ng-href="" class="book-card my-animation" *ngFor="let book of libraryService.myBooks" (click)="show(book)">
+        <img class="book-img" src={{book.thumbnail}} alt="book-image">
+        <div class="book-container">
+            <p>{{book.title}}</p>
+        </div>
+      </div>
+
     </div>
   
     <div class="d-flex justify-content-center">
-      <!-- TODO: Show your library content -->
       <!-- TODO: Show pagnation -->
       <app-pager *ngIf="searchFinish">
       </app-pager>
