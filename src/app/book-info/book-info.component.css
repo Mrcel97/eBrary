@@ -86,3 +86,8 @@ h6 {
 .category:hover {
   background-color: gray;
 }
+.title-text {
+  color: black;
+  margin-top: 5px auto auto auto;
+  font-size: 20px;
+}
