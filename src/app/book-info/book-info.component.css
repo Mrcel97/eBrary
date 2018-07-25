@@ -15,6 +15,7 @@ h6 {
     grid-template-columns: 1fr;
     border-radius: 3px;
     overflow: auto;
+    margin-bottom: 20px;
 }
 .sample-text{
   color: black;
@@ -42,8 +43,8 @@ h6 {
   transition-timing-function: ease;
   transition-duration: 0.35s;
   position: absolute;
-  top: 135px;
-  left: 19px;
+  top: 130px;
+  left: 18px;
   height: 16px;
   padding: 4px;
   color: white;
@@ -74,7 +75,7 @@ h6 {
   left: 30px;
   color: rgb(0, 200, 0);
   border-radius: 50%;
-  background-color: green;
+  background-color: whitesmoke;
   z-index: 15;
   cursor: pointer;
 }
