@@ -6,15 +6,30 @@
       <form class="form-inline">
         <p>Looking for an specific book? (v2.0)</p>
         <div class="form-group">
-          <input type="search"
+          <input #searchBox
+                 id="search-box"
+                 (keyup)="search(searchBox.value)"
+                 type="search"
                  class="txt form-control"
                  placeholder="Search..."
                  name="search"
-                 required>
+                 autocomplete="off"
+                 value="{{inputContent}}"
+                 required
+                 />
+          <ul class="search-result">
+            <li *ngFor="let book of books$ | async  | slice:0:10;" (click)="filter(book.title)" >
+              {{book.title}}
+            </li>
+          </ul>
         </div>
         <button type="submit"
-                class="btn">
+                class="btn"
+                (click)="filter(searchBox.value)">
           Search
+        </button>
+        <button type="submit" class="btn" (click)="clearFilter()" style="background-color: rgb(255, 206, 116);">
+          Clear Filter
         </button>
       </form>
     </div>
@@ -26,7 +41,7 @@
         <a class="link" routerLink="/search/">Searching new eBooks!</a>
       </div>
 
-      <div ng-href="" class="book-card my-animation" *ngFor="let book of libraryService.myBooks" (click)="show(book)">
+      <div ng-href="" class="book-card my-animation" *ngFor="let book of libraryService.filteredBooks" (click)="show(book)">
         <img class="book-img" src={{book.thumbnail}} alt="book-image">
         <div class="book-container">
             <p>{{book.title}}</p>
