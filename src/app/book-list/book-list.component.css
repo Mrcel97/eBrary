@@ -55,6 +55,7 @@ a:hover + .book-info {
 }
 .show{
     display:block;
+    margin-bottom: 40px;
 }
 
 #modal-container {
