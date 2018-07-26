@@ -5,6 +5,9 @@ import { LibraryComponent } from './library/library.component';
 
 const routes: Routes = [
   {
+    path: '', redirectTo: '/search', pathMatch: 'full'
+  },
+  {
     path: 'search',
     component: SearchComponent
   },
