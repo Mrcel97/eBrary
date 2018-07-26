@@ -9,16 +9,31 @@
       <p>Introduce a book to start your search!</p>
       <div class="form-group">
         <input type="search"
-                class="form-control txt"
-                placeholder="Search..."
-                name="search"
-                [(ngModel)]="term"
-                required>
+               #searchBox 
+               id="search-box" 
+               (keyup)="search(searchBox.value)"
+               class="form-control txt"
+               placeholder="Search..."
+               name="search"
+               [(ngModel)]="term"
+               autocomplete="off"
+               required
+               />
       </div>
+      <ul id="autocomplete" class="search-result" (clickOutside)="closeAutocomplete(searchBox.value)">
+        <li *ngFor="let book of books$ | async | slice:0:5" >
+          <a (click)="specificSearch(book.title)">
+            {{book.title}}
+          </a>
+        </li>
+      </ul>
       <button type="submit"
               class="btn btn-primary"
               [disabled]="!f.valid">
         Search
+      </button>
+      <button type="submit" class="btn" (click)="clearFilter()" style="background-color: rgb(255, 206, 116);">
+        Clear Filter
       </button>
     </form>
   </div>

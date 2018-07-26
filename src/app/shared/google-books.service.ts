@@ -5,6 +5,8 @@ import { BehaviorSubject, Observable } from 'rxjs/Rx';
 
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+import { catchError, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
 declare var require: any
 
 @Injectable({
@@ -134,4 +136,39 @@ export class GoogleBooksService {
         this.imageNotFound);
     }
   }
+
+  getHeroes(term: string): Observable<Book[]> {
+    if (!term.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
+    return this.http.get(`${this.API_PATH}?q=${term}&maxResults=${this.pageSize}&startIndex=${this.startIndex}`)
+      .map(res => res.json()) //Map response as JSON.
+      .map(data => { //Map data to get only 10 Obects.
+        return data.items ? data.items : [];
+      })
+      .map(items => { //Map items of JSON to convert into Books Objects.
+        return items.map(item => this.bookFactory(item))
+      })
+
+  }
+
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+   
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+   
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+   
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+
+  private log(message: string) {
+    console.log(message);
+  }
+
 }
