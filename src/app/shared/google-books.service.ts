@@ -57,10 +57,6 @@ export class GoogleBooksService {
     }
   }
 
-  set page(val: number) {
-    //TODO
-  }
-
   public searchBooks(queryTitle: string) {
     this.ended.next(false);
     this.query = queryTitle;
@@ -104,13 +100,6 @@ export class GoogleBooksService {
     }
   }
 
-  retrieveBook(bookId: string) {
-    //TODO
-  }
-
-  /** Version 2.0:
-   * Add: country + pdfAviavility + viewable[OPTN] + saleability[OPTN] +
-   */
   private bookFactory(item: any): Book {
     try {
       return new Book(item.id,
@@ -122,7 +111,8 @@ export class GoogleBooksService {
         item.volumeInfo.description,
         item.volumeInfo.categories,
         item.volumeInfo.imageLinks.thumbnail,
-        item.volumeInfo.imageLinks.smallThumbnail);
+        item.volumeInfo.imageLinks.smallThumbnail,
+        item.volumeInfo.infoLink);
     } catch (TypeError) {
       return new Book(item.id,
         item.volumeInfo.title,
@@ -133,9 +123,12 @@ export class GoogleBooksService {
         item.volumeInfo.description,
         item.volumeInfo.categories,
         this.imageNotFound,
-        this.imageNotFound);
+        this.imageNotFound,
+        item.volumeInfo.infoLink);
     }
   }
+
+  // Autocomplete - code
 
   getHeroes(term: string): Observable<Book[]> {
     if (!term.trim()) {
@@ -151,24 +144,6 @@ export class GoogleBooksService {
         return items.map(item => this.bookFactory(item))
       })
 
-  }
-
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-   
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-   
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-   
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
-
-  private log(message: string) {
-    console.log(message);
   }
 
 }

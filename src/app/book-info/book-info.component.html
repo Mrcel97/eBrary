@@ -5,7 +5,7 @@
     <h3>{{modalService.book.title}}</h3>
     <hr/>
     <div class="pop-thumb">
-        <img align="left" class="book-img" src="{{modalService.book.thumbnail}}" alt="{{modalService.book.title}} cover">
+        <img align="left" class="book-img" src="{{modalService.book.thumbnail}}" (click)="redirectTo(modalService.book.infoLink)" alt="{{modalService.book.title}} cover">
     </div>
     <div class="right-text">
       <ul>

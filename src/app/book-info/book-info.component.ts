@@ -31,4 +31,9 @@ export class BookInfoComponent  {
     this.libraryService.removeBook(book);
   }
 
+  redirectTo(link: string){
+    console.log("redirect to: ", link);
+    window.open(link, '_blank');
+  }
+
 }
