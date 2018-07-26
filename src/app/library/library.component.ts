@@ -56,4 +56,10 @@ export class LibraryComponent implements OnInit {
     this.libraryService.filterBooks(term);
   }
 
+  closeAutocomplete(text: string): void {
+    if (text != '') {
+      this.searchTerms.next('');
+    }
+  }
+
 }
