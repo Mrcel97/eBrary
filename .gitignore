@@ -17,6 +17,11 @@
 .settings/
 *.sublime-workspace
 
+### Firebase ###
+.idea
+**/node_modules/*
+**/.firebaserc
+
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json
