@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ClickOutsideModule } from 'ng-click-outside';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -38,7 +39,8 @@ import { ModalService } from './services/modal.service';
     ReactiveFormsModule,
     HttpModule,
     BrowserAnimationsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    ClickOutsideModule
   ],
   entryComponents: [BookInfoComponent, BookListComponent],
   providers: [GoogleBooksService, LibraryService, DomService, ModalService],

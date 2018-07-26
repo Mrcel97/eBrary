@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { GoogleBooksService } from "../shared/google-books.service";
 import { Book } from '../shared/book';
+import { Subject, Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -13,6 +15,8 @@ export class SearchComponent implements OnInit {
 
   private term: string = "";
   private books: Book[];
+  books$: Observable<Book[]>;
+  private searchTerms = new Subject<string>();
 
   constructor(
     private router: Router,
@@ -29,11 +33,39 @@ export class SearchComponent implements OnInit {
     this.router.navigate(['search', {term: this.term}]) // Change URL.
   }
 
+  specificSearch(term: string) {
+    this.router.navigate(['search', {term: this.term}]) // Change URL.
+  }
+
   onSearch(term: string) {
     var search = this.googleBooksService.searchBooks(term);
   }
 
-  ngOnInit() {
+  search(term: string): void {
+    this.searchTerms.next(term);
+  }
+
+  clearFilter():void {
+    this.searchTerms.next('');
+  }
+
+  closeAutocomplete(text: string): void {
+    if (text != '') {
+      this.searchTerms.next('');
+    }
+  }
+ 
+  ngOnInit(): void {
+    this.books$ = this.searchTerms.pipe(
+      // wait 300ms after each keystroke before considering the term
+      debounceTime(300),
+ 
+      // ignore new term if same as previous term
+      distinctUntilChanged(),
+ 
+      // switch to new search observable each time the term changes
+      switchMap((term: string) => this.googleBooksService.getHeroes(term)),
+    );
   }
   
 }
