@@ -1,6 +1,6 @@
 # BookSearch
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+[This project](https://ebrary-b76b0.firebaseapp.com/search) was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
 
 ## Deployment
 
