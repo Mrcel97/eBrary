@@ -35,7 +35,7 @@
     </div>
     <hr />
     <div class="container-nav" style="padding-top: 13px">
-      <div class="text-center" *ngIf="libraryService.myBooks == empty">
+      <div class="text-center" *ngIf="libraryService.myBooks.length == 0">
         <!-- TODO: Show when library is empty -->
         <p class="suggestion">Your library is actually empty. Try </p>
         <a class="link" routerLink="/search/">Searching new eBooks!</a>
@@ -59,5 +59,3 @@
 <!-- Custom modal setup -->
 <div id="modal-container" class="hidden"></div>
 <div id="overlay" (click)="modalService.destroy()" class="hidden" ></div>
-
-<pre>{{closeResult}}</pre>

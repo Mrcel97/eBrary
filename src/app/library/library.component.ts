@@ -12,13 +12,13 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
   styleUrls: ['./library.component.css']
 })
 export class LibraryComponent implements OnInit {
-  private searchFinish: boolean = false;
+  public searchFinish: boolean = false;
   books$: Observable<Book[]>;
   private searchTerms = new Subject<string>();
   inputContent: string = '';
 
-  constructor( private libraryService: LibraryService,
-               private modalService: ModalService, ) { }
+  constructor( public libraryService: LibraryService,
+               public modalService: ModalService, ) { }
 
   ngOnInit() {
     this.books$ = this.searchTerms.pipe(

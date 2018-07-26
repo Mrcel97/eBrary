@@ -29,7 +29,8 @@ export class LibraryService {
                                   element.description,
                                   element.categories,
                                   element.thumbnail,
-                                  element.smallThumbnail) )
+                                  element.smallThumbnail,
+                                  element.infoLink) )
     });
   }
 

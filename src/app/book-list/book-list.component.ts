@@ -13,14 +13,13 @@ import { BookInfoComponent } from '../book-info/book-info.component';
   styleUrls: ['./book-list.component.css']
 })
 export class BookListComponent {
-  closeResult: string;
-
+  
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private googleBooksService: GoogleBooksService,
+    public googleBooksService: GoogleBooksService,
     private modelService: NgbModal,
-    private modalService: ModalService ) {}
+    public modalService: ModalService ) {}
 
   show(book: Book) {
     let inputs = {

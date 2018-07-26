@@ -10,16 +10,16 @@ import { Book } from '../shared/book';
 })
 export class BookInfoComponent  {
  
-  private hovering: boolean = false;
+  public hovering: boolean = false;
 
-  constructor(private modalService: ModalService,
+  constructor(public modalService: ModalService,
               private libraryService:LibraryService) { }
 
   public close() {
     this.modalService.destroy();
   }
 
-  private contains(book: Book): boolean {
+  public contains(book: Book): boolean {
     return this.libraryService.myBooks.includes(book);
   }
 

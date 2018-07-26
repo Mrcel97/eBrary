@@ -13,7 +13,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 })
 export class SearchComponent implements OnInit {
 
-  private term: string = "";
+  term: string = "";
   private books: Book[];
   books$: Observable<Book[]>;
   private searchTerms = new Subject<string>();
@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private googleBooksService: GoogleBooksService){
+    public googleBooksService: GoogleBooksService){
       this.route.params.subscribe( param => { // Hear URL to detect changes.
         if (param['term']) {
           this.onSearch(param['term']);

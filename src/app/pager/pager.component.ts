@@ -9,7 +9,7 @@ import { GoogleBooksService } from '../shared/google-books.service';
 export class PagerComponent implements OnInit {
   private totalPages: number;
   private actualPage: number = 1;
-  private searchFinish: boolean = false;
+  public searchFinish: boolean = false;
 
   constructor(
     private googleBooksService: GoogleBooksService,
