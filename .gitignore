@@ -26,6 +26,20 @@ lerna-debug.log
 *~
 service-account-credentials.json
 **/package-lock.json
+.npm
+.tmp
+.vscode/
+coverage
+firebase-functions-*.tgz
+integration_test/.firebaserc
+integration_test/*.log
+integration_test/functions/firebase-functions.tgz
+integration_test/functions/package.json
+lib
+node_modules
+npm-debug.log
+typings
+yarn.lock
 
 # IDE - VSCode
 .vscode/*
