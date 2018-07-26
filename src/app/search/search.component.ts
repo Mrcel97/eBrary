@@ -34,7 +34,7 @@ export class SearchComponent implements OnInit {
   }
 
   specificSearch(term: string) {
-    this.router.navigate(['search', {term: this.term}]) // Change URL.
+    this.router.navigate(['search', {term: term}]) // Change URL.
   }
 
   onSearch(term: string) {
