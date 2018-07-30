@@ -42,7 +42,6 @@ export class LibraryComponent implements OnInit {
   }
 
   search(bookName: string, keyCode: number): void {
-    console.log(keyCode);
     if (keyCode == 13 || keyCode == 0) {
       this.specificSearch(bookName);
       this.searchTerms.next('');
