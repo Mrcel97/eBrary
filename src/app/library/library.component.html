@@ -3,12 +3,12 @@
         <span class="subtitle">My eBrary</span>
     </div>
     <div class="container-nav">
-      <form class="form-inline">
+      <form class="form-inline" (ngSubmit)="search(searchBox.value, 13)">
         <p>Looking for an specific book? (v2.0)</p>
         <div class="form-group">
           <input #searchBox
                  id="search-box"
-                 (keyup)="search(searchBox.value)"
+                 (keyup)="search(searchBox.value, $event.keyCode)"
                  type="search"
                  class="txt form-control"
                  placeholder="Search..."
@@ -18,7 +18,7 @@
                  required
                  />
           <ul class="search-result" (clickOutside)="closeAutocomplete(searchBox.value)">
-            <li *ngFor="let book of books$ | async  | slice:0:10;" (click)="filter(book.title)" >
+            <li *ngFor="let book of books$ | async  | slice:0:10;" (click)="specificSearch(book.title)" >
               {{book.title}}
             </li>
           </ul>

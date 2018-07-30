@@ -5,6 +5,7 @@ import { BookInfoComponent } from '../book-info/book-info.component';
 import { ModalService } from '../services/modal.service';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-library',
@@ -40,14 +41,20 @@ export class LibraryComponent implements OnInit {
     this.modalService.init(BookInfoComponent, inputs, {}, book);
   }
 
-  search(bookName: string): void {
+  search(bookName: string, keyCode: number): void {
+    console.log(keyCode);
+    if (keyCode == 13 || keyCode == 0) {
+      this.specificSearch(bookName);
+      this.searchTerms.next('');
+      return;
+    }
     this.searchTerms.next(bookName);
     this.filter(bookName);
   }
 
   clearFilter():void {
-    this.searchTerms.next('');
     this.libraryService.clearFilter();
+    this.closeAutocomplete();
   }
 
   filter(term: string): void {
@@ -56,10 +63,14 @@ export class LibraryComponent implements OnInit {
     this.libraryService.filterBooks(term);
   }
 
-  closeAutocomplete(text: string): void {
-    if (text != '') {
-      this.searchTerms.next('');
-    }
+  specificSearch(term: string) {
+    this.closeAutocomplete();
+    this.inputContent = term;
+    this.libraryService.filterBooks(term);
+  }
+
+  closeAutocomplete(): void {
+    this.searchTerms.next('');
   }
 
 }

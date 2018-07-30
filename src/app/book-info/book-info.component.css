@@ -38,9 +38,12 @@ h6 {
 }
 .info-button {
   display: inline-block;
-  margin-left: 15%;
   width: 100px;
   height: 25px;
+  max-width: 300px;
+  margin: auto;
+  margin-left: 15%;
+  margin-right: 10%;
   background-color: rgb(61, 90, 255);
   text-align: center;
   font-size: 14px;
@@ -112,7 +115,7 @@ h6 {
   display:block;
   padding: 10px;
   min-width: 130px;
-  width: 5%;
+  width: 150px;
   max-width: 300px;
   margin: auto;
   margin-left: 5%;
@@ -135,7 +138,7 @@ h6 {
 }
 .right-text {
   text-align: justify;
-  margin-left: 180px;
+  margin-left: 275px;
   margin-right: 30px;
 }
 .category {

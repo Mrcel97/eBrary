@@ -17,11 +17,10 @@ export class PagerComponent implements OnInit {
 
   ngOnInit() {
     this.googleBooksService.hasEnded().subscribe(value => {
-      if (value == true) {
-        this.searchFinish = true;
+      this.searchFinish = value;
+      
+      if (this.searchFinish) {
         this.initPager();
-      } else {
-        this.searchFinish = false;
       }
     });
   }
@@ -31,15 +30,19 @@ export class PagerComponent implements OnInit {
   }
 
   getPage(num: number) {
-    if (0 < num && num < this.totalPages) {
-      if (num + 10 < this.totalPages) {
+    const minPages = 0;
+    const maxPages = 10;
+
+    if ( num < 0 && num > this.totalPages ) {
+      return;
+    }
+    // var > const
+    if (minPages < num && num < this.totalPages) {
+      if (num + maxPages < this.totalPages) {
         this.actualPage = num;
-      } else if (num + 10 > this.totalPages) {
-        this.actualPage = this.totalPages-8;
       }
       this.googleBooksService.changePage(num);
     }
-    console.log(this.actualPage);
   }
 
 }

@@ -16,6 +16,7 @@ export class SearchComponent implements OnInit {
   term: string = "";
   private books: Book[];
   books$: Observable<Book[]>;
+  inputContent: string = '';
   private searchTerms = new Subject<string>();
 
   constructor(
@@ -29,19 +30,30 @@ export class SearchComponent implements OnInit {
       } )
     }
 
+  // Start GoogleBooks Search
   doSearch() {
+    this.closeAutocomplete();
     this.router.navigate(['search', {term: this.term}]) // Change URL.
   }
 
+  // Click on Autocomplete search
   specificSearch(term: string) {
+    this.inputContent = term;
+    this.closeAutocomplete();
     this.router.navigate(['search', {term: term}]) // Change URL.
   }
 
+  // GoogleBooksSearch
   onSearch(term: string) {
     var search = this.googleBooksService.searchBooks(term);
   }
 
-  search(term: string): void {
+  // Autocomplete search
+  search(term: string, keyCode: number): void {
+    if (keyCode == 13 || keyCode == 0) {
+      this.searchTerms.next('');
+      return;
+    }
     this.searchTerms.next(term);
   }
 
@@ -49,10 +61,8 @@ export class SearchComponent implements OnInit {
     this.searchTerms.next('');
   }
 
-  closeAutocomplete(text: string): void {
-    if (text != '') {
-      this.searchTerms.next('');
-    }
+  closeAutocomplete(): void {
+    this.search('',13);
   }
  
   ngOnInit(): void {
@@ -64,7 +74,7 @@ export class SearchComponent implements OnInit {
       distinctUntilChanged(),
  
       // switch to new search observable each time the term changes
-      switchMap((term: string) => this.googleBooksService.getHeroes(term)),
+      switchMap((term: string) => this.googleBooksService.getBooks(term)),
     );
   }
   

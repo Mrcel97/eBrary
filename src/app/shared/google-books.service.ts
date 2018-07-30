@@ -79,12 +79,12 @@ export class GoogleBooksService {
       .do(_ => this.loading = false)
       .do(_ => (this.enlapsedTime = ( Math.round( (window.performance.now() - initialTime ))/1000 ) ) )
       .subscribe((books) => {
-        if (books.length != 0) {
+        this.haveBooks = books.length != 0;
+
+        if (this.haveBooks) {
           this.books = books;
-          this.haveBooks = true;
-        } else {
-          this.haveBooks = false;
         }
+
         this.ended.next(true);
       })
   }
@@ -100,44 +100,43 @@ export class GoogleBooksService {
     }
   }
 
-  private bookFactory(item: any): Book {
-    try {
-      return new Book(item.id,
-        item.volumeInfo.title.split(" ").splice(0,15).join(" "),
-        item.volumeInfo.subtitle,
-        item.volumeInfo.authors,
-        item.volumeInfo.publisher,
-        item.volumeInfo.publishedDate,
-        item.volumeInfo.description,
-        item.volumeInfo.categories,
-        item.volumeInfo.imageLinks.thumbnail,
-        item.volumeInfo.imageLinks.smallThumbnail,
-        item.volumeInfo.infoLink);
-    } catch (TypeError) {
-      return new Book(item.id,
-        item.volumeInfo.title,
-        item.volumeInfo.subtitle,
-        item.volumeInfo.authors,
-        item.volumeInfo.publisher,
-        item.volumeInfo.publishedDate,
-        item.volumeInfo.description,
-        item.volumeInfo.categories,
-        this.imageNotFound,
-        this.imageNotFound,
-        item.volumeInfo.infoLink);
+  private bookFactory(item: any ): Book {
+    var book: Book ;
+    var images: string[] = item.volumeInfo.imageLinks;
+
+    images = this.checkThumbnailUndefined(images);
+
+    book = new Book(item.id,
+      item.volumeInfo.title,
+      item.volumeInfo.subtitle,
+      item.volumeInfo.authors,
+      item.volumeInfo.publisher,
+      item.volumeInfo.publishedDate,
+      item.volumeInfo.description,
+      item.volumeInfo.categories,
+      images[0],
+      images[1],
+      item.volumeInfo.infoLink);
+    book.checkCorrectness();
+    return book;
+  }
+
+  private checkThumbnailUndefined(image: any): string[] {
+    if ( image == undefined ) {
+      return [this.imageNotFound, this.imageNotFound]
     }
+    return [image.thumbnail, image.smallThumbnail]
   }
 
   // Autocomplete - code
-
-  getHeroes(term: string): Observable<Book[]> {
+  getBooks(term: string): Observable<Book[]> {
     if (!term.trim()) {
-      // if not search term, return empty hero array.
+      // if no search term, return empty array.
       return of([]);
     }
     return this.http.get(`${this.API_PATH}?q=${term}&maxResults=${this.pageSize}&startIndex=${this.startIndex}`)
       .map(res => res.json()) //Map response as JSON.
-      .map(data => { //Map data to get only 10 Obects.
+      .map(data => {
         return data.items ? data.items : [];
       })
       .map(items => { //Map items of JSON to convert into Books Objects.

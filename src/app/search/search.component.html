@@ -11,22 +11,25 @@
         <input type="search"
                #searchBox 
                id="search-box" 
-               (keyup)="search(searchBox.value)"
+               (keyup)="search(searchBox.value, $event.keyCode)"
                class="form-control txt"
                placeholder="Search..."
                name="search"
                [(ngModel)]="term"
+               value="{{inputContent}}"
                autocomplete="off"
                required
                />
       </div>
-      <ul id="autocomplete" class="search-result" (clickOutside)="closeAutocomplete(searchBox.value)">
-        <li *ngFor="let book of books$ | async | slice:0:5" >
-          <a (click)="specificSearch(book.title)">
-            {{book.title}}
-          </a>
-        </li>
-      </ul>
+      <div id="autocomplete">
+        <ul class="search-result" (clickOutside)="closeAutocomplete()">
+          <li *ngFor="let book of books$ | async | slice:0:5" >
+            <a (click)="specificSearch(book.title)">
+              {{book.title}}
+            </a>
+          </li>
+        </ul>
+      </div>
       <button type="submit"
               class="btn btn-primary"
               [disabled]="!f.valid">
