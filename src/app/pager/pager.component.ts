@@ -43,6 +43,7 @@ export class PagerComponent implements OnInit {
     for (let page = this.actualPage; page < this.lastPage; page++) { //Total Pages except of page 0 (no resusts on it)
       if (this.pager.length < page) {
         this.pageAmount++;
+        this.pager.push(new Page(this.pageAmount));
       }
     }
   }
