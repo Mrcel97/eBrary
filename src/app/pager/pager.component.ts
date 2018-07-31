@@ -14,6 +14,7 @@ export class PagerComponent implements OnInit {
   private term: string = '';
   private lastPage: number;
   private pageAmount: number = 0;
+  private maxPagItems = 9;
   pager: Page[] = [];
 
   constructor(
@@ -21,34 +22,51 @@ export class PagerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.pageAmount = 0;
     this.googleBooksService.hasEnded().subscribe(value => {
       this.searchFinish = value;
       
       if (this.searchFinish) {
-        if (this.term != this.googleBooksService.query) {
-          this.totalPages = this.googleBooksService.totalPages;
-          this.term = this.googleBooksService.query;
-        }
         this.initPager();
       }
     });
   }
 
   initPager() {
-    // Delete 1st page only if we are on the third page.
-    if (this.actualPage > 2) {
+
+    if (this.term != this.googleBooksService.query) {
+      this.totalPages = this.googleBooksService.totalPages;
+      this.term = this.googleBooksService.query;
+      this.getPage(1);
+    }
+
+    console.log('Amount of Pages:', this.pageAmount);
+    console.log('Before',this.pager);
+    if (this.actualPage > 2 && !this.goingBack()) {
+      console.log('Deleting first elem', this.pager[0]);
       this.pager.shift();
     }
     this.checkMaxPag();
-    for (let page = this.actualPage; page < this.lastPage; page++) { //Total Pages except of page 0 (no resusts on it)
+    for (let page = this.actualPage; page <= this.lastPage; page++) { //Total Pages except of page 0 (no resusts on it)
       if (this.pager.length < page) {
         this.pageAmount++;
         this.pager.push(new Page(this.pageAmount));
       }
     }
+    if (this.goingBack()) {
+      console.log('Going back!');
+      this.pager.unshift(new Page(this.actualPage-1));
+      if (this.pager.length > this.maxPagItems) {
+        console.log('Max size reached, Popping:', this.pager[this.pager.length-1]);
+        this.pageAmount--;
+        this.pager.pop();
+      }
+    }
+    console.log('After',this.pager);
   }
 
   getPage(num: number) {
+    console.log('Getting:', num);
     const minPages = 0;
     const maxPages = 10;
     if ( num < 0 && num > this.totalPages ) {
@@ -63,12 +81,31 @@ export class PagerComponent implements OnInit {
 
   // Set the Pager max size to maxPageItems or totalPages.
   checkMaxPag(){
-    var maxPagItems = 9;
-
     this.lastPage = this.totalPages;
-    if (this.totalPages > maxPagItems) {
-      this.lastPage = maxPagItems;
+    if (this.totalPages > this.maxPagItems) {
+      this.lastPage = this.maxPagItems;
     }
   }
 
+  goingBack(): boolean{
+    return this.actualPage == this.pager[0].num && this.actualPage != 1;
+  }
+
 }
+/*
+console.log('First num:', this.pager[0].num);
+if (this.pager[0].num == page && page != 1) {
+  console.log('Go back', 'Page:', page, 'Actual Page:', this.actualPage);
+  if (page >= 2) {
+    console.log('Adding to beggining', this.actualPage-1);
+    this.pager.unshift(new Page(this.actualPage-1));
+  }
+  console.log('PagerLen:', this.pager.length, 'maxPagerItems:', this.maxPagItems);
+  if (this.pager.length == this.maxPagItems) {
+    console.log('Popping:', this.pager.pop());
+    
+    this.pageAmount--;
+  }
+  console.log(this.pager);
+}
+*/
