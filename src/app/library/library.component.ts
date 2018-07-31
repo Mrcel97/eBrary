@@ -51,7 +51,8 @@ export class LibraryComponent implements OnInit {
     this.filter(bookName);
   }
 
-  clearFilter():void {
+  clearFilter(): void {
+    this.inputContent = '';
     this.libraryService.clearFilter();
     this.closeAutocomplete();
   }
