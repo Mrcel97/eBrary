@@ -11,6 +11,9 @@ export class PagerComponent implements OnInit {
   private totalPages: number;
   public searchFinish: boolean = false;
   private actualPage: number = 1;
+  private term: string = '';
+  private lastPage: number;
+  private pageAmount: number = 0;
   pager: Page[] = [];
 
   constructor(
@@ -22,15 +25,25 @@ export class PagerComponent implements OnInit {
       this.searchFinish = value;
       
       if (this.searchFinish) {
+        if (this.term != this.googleBooksService.query) {
+          this.totalPages = this.googleBooksService.totalPages;
+          this.term = this.googleBooksService.query;
+        }
         this.initPager();
       }
     });
   }
 
   initPager() {
-    this.totalPages = this.googleBooksService.totalPages;
-    for (let page = this.actualPage; page <= 9; page++) { //Total Pages except of page 0 (no resusts on it)
-      this.pager.push( new Page(page) );
+    // Delete 1st page only if we are on the third page.
+    if (this.actualPage > 2) {
+      this.pager.shift();
+    }
+    this.checkMaxPag();
+    for (let page = this.actualPage; page < this.lastPage; page++) { //Total Pages except of page 0 (no resusts on it)
+      if (this.pager.length < page) {
+        this.pageAmount++;
+      }
     }
   }
 
@@ -44,6 +57,16 @@ export class PagerComponent implements OnInit {
     if (minPages < num && num < this.totalPages) {
       this.actualPage = num;
       this.googleBooksService.changePage(num);
+    }
+  }
+
+  // Set the Pager max size to maxPageItems or totalPages.
+  checkMaxPag(){
+    var maxPagItems = 9;
+
+    this.lastPage = this.totalPages;
+    if (this.totalPages > maxPagItems) {
+      this.lastPage = maxPagItems;
     }
   }
 
