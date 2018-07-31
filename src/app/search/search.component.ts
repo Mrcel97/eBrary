@@ -58,7 +58,7 @@ export class SearchComponent implements OnInit {
   }
 
   clearFilter():void {
-    this.searchTerms.next('');
+    this.inputContent = '';
   }
 
   closeAutocomplete(): void {
