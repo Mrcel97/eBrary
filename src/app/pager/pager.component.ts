@@ -23,7 +23,7 @@ export class PagerComponent implements OnInit {
 
   ngOnInit() {
     this.pageAmount = 0;
-    this.googleBooksService.hasEnded().subscribe(value => {
+    this.googleBooksService.hasEnded().subscribe(value => { // Hear search service
       this.searchFinish = value;
       
       if (this.searchFinish) {
@@ -34,16 +34,19 @@ export class PagerComponent implements OnInit {
 
   initPager() {
 
+    // If is a new search reset var.
     if (this.term != this.googleBooksService.query) {
+      console.log('New search');
+      this.pager = [];
+      this.pageAmount = 0;
       this.totalPages = this.googleBooksService.totalPages;
       this.term = this.googleBooksService.query;
+
       this.getPage(1);
     }
 
-    console.log('Amount of Pages:', this.pageAmount);
-    console.log('Before',this.pager);
+    // Hide left page every 2 pages.
     if (this.actualPage > 2 && !this.goingBack()) {
-      console.log('Deleting first elem', this.pager[0]);
       this.pager.shift();
     }
     this.checkMaxPag();
@@ -53,20 +56,11 @@ export class PagerComponent implements OnInit {
         this.pager.push(new Page(this.pageAmount));
       }
     }
-    if (this.goingBack()) {
-      console.log('Going back!');
-      this.pager.unshift(new Page(this.actualPage-1));
-      if (this.pager.length > this.maxPagItems) {
-        console.log('Max size reached, Popping:', this.pager[this.pager.length-1]);
-        this.pageAmount--;
-        this.pager.pop();
-      }
-    }
-    console.log('After',this.pager);
+    this.checkGoingBack();
+    this.checkGoingForward();
   }
 
-  getPage(num: number) {
-    console.log('Getting:', num);
+  getPage(num: number): void {
     const minPages = 0;
     const maxPages = 10;
     if ( num < 0 && num > this.totalPages ) {
@@ -80,15 +74,40 @@ export class PagerComponent implements OnInit {
   }
 
   // Set the Pager max size to maxPageItems or totalPages.
-  checkMaxPag(){
+  checkMaxPag(): void {
     this.lastPage = this.totalPages;
     if (this.totalPages > this.maxPagItems) {
       this.lastPage = this.maxPagItems;
     }
   }
 
-  goingBack(): boolean{
+  checkGoingBack(): void {
+    if (this.goingBack()) {
+      this.pager.unshift(new Page(this.actualPage-1));
+      if (this.pager.length > this.maxPagItems) {
+        this.pageAmount--;
+        this.pager.pop();
+      }
+    }
+  }
+
+  checkGoingForward(): void {
+    if (this.goingMaxPage() && this.actualPage+1 < this.totalPages) {
+      this.pageAmount++;
+      this.pager.push(new Page(this.actualPage+1));
+      if (this.pager.length > this.maxPagItems) {
+        this.pageAmount--;
+        this.pager.shift();
+      }
+    }
+  }
+
+  goingBack(): boolean {
     return this.actualPage == this.pager[0].num && this.actualPage != 1;
+  }
+
+  goingMaxPage(): boolean {
+    return this.actualPage == this.pager[this.pager.length-1].num && this.actualPage != 1;
   }
 
 }
