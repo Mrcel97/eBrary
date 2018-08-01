@@ -36,10 +36,9 @@ export class PagerComponent implements OnInit {
 
     // If is a new search reset var.
     if (this.term != this.googleBooksService.query) {
-      console.log('New search');
       this.pager = [];
       this.pageAmount = 0;
-      this.totalPages = this.googleBooksService.totalPages;
+      this.totalPages = Math.trunc(this.googleBooksService.totalPages - (this.googleBooksService.totalPages/10));
       this.term = this.googleBooksService.query;
 
       this.getPage(1);
@@ -67,7 +66,7 @@ export class PagerComponent implements OnInit {
       return;
     }
     // var > const
-    if (minPages < num && num < this.totalPages) {
+    if (minPages < num && num <= this.totalPages) {
       this.actualPage = num;
       this.googleBooksService.changePage(num);
     }
